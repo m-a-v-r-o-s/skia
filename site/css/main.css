@@ -1,0 +1,1195 @@
+/* Hallmark · macrostructure: Masthead Lockup · tone: austere · anchor hue: neutral
+ * scope: hero section only · studied: yes · DNA-source: image (user reference)
+ * one typeface (Anton) · zero radii · rules are the only divider language
+ * pre-emit critique: P5 H5 E4 S5 R5 V4
+ */
+
+/* =========================================================
+   SKIÁ ATHENS - Marble Monochrome
+   Palette + tracking extracted from grayscale-studio.jp
+   ========================================================= */
+
+:root{
+  /* ramp - verbatim from the inspiration site's bundle */
+  --black:#000;
+  --ink-1:#1e1e1e;  --ink-2:#232323;  --ink-3:#2f2f2f;
+  --ink-4:#3c3c3c;  --ink-5:#4e4e4e;
+  --grey-1:#707070; --grey-2:#929292; --grey-3:#999;
+  --grey-4:#b2b2b2; --grey-5:#d3d3d3; --grey-6:#d9d9d9;
+  --marble:#ececec; --white:#fff;
+  --void:#050505;
+
+  --font-display:'Anton', Impact, sans-serif;
+  --font-body:'Satoshi', 'Helvetica Neue', sans-serif;
+
+  --track-display:-0.01em;
+  --track-micro:0.05em;
+
+  --ease:cubic-bezier(.32,.72,0,1);
+  --dur:900ms;
+
+  --pad-x:clamp(1.25rem, 4.5vw, 5.5rem);
+  --pad-y:clamp(8rem, 14vh, 14rem);
+
+  /* masthead lockup */
+  --hero-pad:clamp(.7rem, 2vw, 2.25rem);
+  --rule-heavy:clamp(3px, .42vw, 8px);
+  --rule-mid:clamp(2px, .22vw, 4px);
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+
+/* class selectors outrank the UA [hidden] rule - make hidden absolute */
+[hidden]{display:none !important;}
+
+html{
+  -webkit-text-size-adjust:100%;
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:var(--marble);
+  color:var(--black);
+  font-family:var(--font-body);
+  font-weight:400;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+main{
+  overflow-x:hidden;
+  width:100%;
+  max-width:100%;
+}
+
+img{display:block;max-width:100%;height:auto;}
+a{color:inherit;text-decoration:none;}
+button,input,select,textarea{font:inherit;color:inherit;}
+h1,h2,h3,p,figure,figcaption{margin:0;}
+sup{font-size:.34em;vertical-align:super;letter-spacing:0;}
+
+::selection{background:var(--black);color:var(--marble);}
+
+/* ---------- film grain: fixed, pointer-events-none only ---------- */
+.grain{
+  position:fixed;
+  inset:0;
+  z-index:9;
+  pointer-events:none;
+  opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- shared media frame ---------- */
+.media{
+  position:relative;
+  overflow:hidden;
+  background:var(--grey-5);
+}
+.media img,
+.hero__media img,
+.slice__media img,
+.prod__inner img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:grayscale(1) contrast(1.15);
+  transition:transform 1200ms var(--ease);
+  will-change:transform;
+}
+/* one-shot media reveal. Visible is the default: JS opts an element in by adding
+   .reveal, then .is-in lands it permanently. No-JS and reduced-motion never get
+   .reveal at all, so nothing can be left stranded hidden. */
+.reveal{
+  opacity:0;
+  transform:scale(.94);
+  transition:opacity 900ms var(--ease), transform 900ms var(--ease);
+}
+.reveal.is-in{opacity:1;transform:none;}
+
+.media--3x4{aspect-ratio:3/4;}
+.media--4x5{aspect-ratio:4/5;}
+.media--1x1{aspect-ratio:1/1;}
+
+/* =========================================================
+   NAV - floats, no bar, inverts per section
+   ========================================================= */
+.nav{
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:40;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:clamp(1.5rem,2.6vw,2.6rem) var(--pad-x);
+
+  /* one ink/paper pair drives the whole nav, so section inversion is a
+     two-token swap instead of a per-element override */
+  --nav-ink:var(--white);
+  --nav-paper:var(--void);
+  --nav-rule:rgba(255,255,255,.34);
+
+  color:var(--nav-ink);
+  transition:color 600ms var(--ease), background-color 600ms var(--ease),
+             padding 600ms var(--ease);
+}
+.nav.is-light{
+  --nav-ink:var(--black);
+  --nav-paper:var(--marble);
+  --nav-rule:rgba(0,0,0,.22);
+}
+
+/* scrim, never a slab - reads as atmosphere across section boundaries */
+.nav.is-stuck{
+  padding-top:clamp(1rem,1.7vw,1.5rem);
+  padding-bottom:clamp(2.4rem,3.4vw,3rem);
+  background:linear-gradient(to bottom,
+    rgba(236,236,236,.92) 0%,
+    rgba(236,236,236,.62) 46%,
+    rgba(236,236,236,0) 100%);
+}
+.nav.is-stuck.is-dark-stuck{
+  background:linear-gradient(to bottom,
+    rgba(5,5,5,.88) 0%,
+    rgba(5,5,5,.55) 46%,
+    rgba(5,5,5,0) 100%);
+}
+
+.nav__mark{
+  font-family:var(--font-display);
+  font-size:clamp(1.35rem,2.1vw,1.9rem);
+  letter-spacing:var(--track-display);
+  line-height:1;
+  text-transform:uppercase;
+}
+
+/* hairline-divided cell strip - a miniature of the hero action row, so the
+   whole first viewport shares one hover language and one typeface */
+.nav__links{
+  display:flex;
+  align-items:stretch;
+}
+
+.nav__link{
+  display:flex;
+  align-items:center;
+  gap:.45em;
+  padding:clamp(.42rem,.55vw,.62rem) clamp(.62rem,.95vw,1.05rem);
+  border-left:1px solid var(--nav-rule);
+  border-radius:0;                     /* squared, like the hero cells */
+  font-family:var(--font-display);     /* Anton, matching the hero */
+  font-size:clamp(.78rem,1vw,1.1rem);
+  line-height:1;
+  letter-spacing:.02em;                /* opens Anton up at small sizes */
+  text-transform:uppercase;
+  white-space:nowrap;
+  transition:background-color 480ms var(--ease),
+             color 480ms var(--ease),
+             transform 480ms var(--ease);
+}
+.nav__link:last-child{border-right:1px solid var(--nav-rule);}
+
+/* the one primary action reads filled by default */
+.nav__link--cta{
+  background:var(--nav-ink);
+  color:var(--nav-paper);
+}
+
+/* hover/focus fills the cell - and empties the already-filled one */
+.nav__link:hover,
+.nav__link:focus-visible{
+  background:var(--nav-ink);
+  color:var(--nav-paper);
+}
+.nav__link--cta:hover,
+.nav__link--cta:focus-visible{
+  background:transparent;
+  color:var(--nav-ink);
+}
+
+.nav__link:active{transform:translateY(1px);}
+
+.nav__link:focus-visible{
+  outline:2px solid var(--nav-ink);
+  outline-offset:2px;                  /* sits outside the fill, stays visible */
+}
+
+.nav__link[aria-disabled="true"]{
+  opacity:.42;
+  pointer-events:none;
+}
+
+.nav__arrow{
+  font-size:.82em;
+  transition:transform 480ms var(--ease);
+}
+.nav__link--cta:hover .nav__arrow{transform:translate(1px,-1px);}
+
+/* hamburger - morphs to X */
+.burger{
+  display:none;
+  position:relative;
+  width:34px; height:34px;
+  padding:0;
+  border:0;
+  background:none;
+  color:inherit;
+  cursor:pointer;
+  z-index:2;
+}
+.burger span{
+  position:absolute;
+  left:5px;
+  width:24px; height:1.5px;
+  background:currentColor;
+  transition:transform 700ms var(--ease), opacity 400ms var(--ease);
+}
+.burger span:nth-child(1){top:14px;}
+.burger span:nth-child(2){top:20px;}
+.burger.is-open span:nth-child(1){transform:translateY(3px) rotate(45deg);}
+.burger.is-open span:nth-child(2){transform:translateY(-3px) rotate(-45deg);}
+
+/* fullscreen overlay */
+.overlay{
+  position:fixed;
+  inset:0;
+  z-index:35;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:var(--pad-x);
+  background:rgba(5,5,5,.88);
+  backdrop-filter:blur(30px);
+  -webkit-backdrop-filter:blur(30px);
+  color:var(--white);
+  opacity:0;
+  visibility:hidden;
+  transition:opacity 700ms var(--ease), visibility 700ms var(--ease);
+}
+.overlay.is-open{opacity:1;visibility:visible;}
+
+.overlay__nav{display:flex;flex-direction:column;gap:.4rem;}
+.overlay__nav a{
+  font-family:var(--font-display);
+  font-size:clamp(2.5rem,11vw,5rem);
+  line-height:1.04;
+  text-transform:uppercase;
+  letter-spacing:var(--track-display);
+  overflow:hidden;
+}
+.overlay__nav a span{
+  display:block;
+  transform:translateY(110%);
+  transition:transform 800ms var(--ease);
+}
+.overlay.is-open .overlay__nav a span{transform:translateY(0);}
+.overlay.is-open .overlay__nav a:nth-child(1) span{transition-delay:100ms;}
+.overlay.is-open .overlay__nav a:nth-child(2) span{transition-delay:160ms;}
+.overlay.is-open .overlay__nav a:nth-child(3) span{transition-delay:220ms;}
+.overlay.is-open .overlay__nav a:nth-child(4) span{transition-delay:280ms;}
+.overlay.is-open .overlay__nav a:nth-child(5) span{transition-delay:340ms;}
+
+.overlay__foot{
+  margin-top:3rem;
+  font-size:.62rem;
+  text-transform:uppercase;
+  letter-spacing:var(--track-micro);
+  color:var(--grey-2);
+}
+
+/* =========================================================
+   1 - HERO (Cinematic Center)
+   ========================================================= */
+.hero{
+  position:relative;
+  min-height:100dvh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:var(--void);
+}
+.hero__media{position:absolute;inset:0;}
+.hero__media img{
+  width:100%;height:100%;
+  object-fit:cover;
+  filter:grayscale(1) contrast(1.2) brightness(.92);
+}
+.hero__wash{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(115% 80% at 50% 46%, rgba(0,0,0,.34) 0%, rgba(0,0,0,.68) 58%, rgba(0,0,0,.88) 100%),
+    linear-gradient(to bottom, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 28%);
+}
+
+/* ---------- masthead lockup: wordmark / rule / meta / rule / acts / rule ---- */
+.hero__lockup{
+  position:relative;
+  z-index:2;
+  width:100%;
+  padding:0 var(--hero-pad);
+  color:var(--white);
+  font-family:var(--font-display);   /* one typeface for the whole lockup */
+}
+
+/* one word, cannot wrap - fills the measure edge to edge */
+.hero__mark{
+  display:block;
+  font-family:var(--font-display);
+  /* Anton metrics: "SKIÁ ATHENS" measures 4.3682em at -.025em tracking, so
+     21.6vw takes the lockup edge to edge. Ink is 1.12em tall - the acute on Á
+     drives ink-ascent to 1.11em - hence the padding-top below. The calc() term
+     is a guard so the mark can never outgrow a short viewport. */
+  font-size:clamp(1.6rem,min(21.6vw,calc((100dvh - 18rem) / 1.16)),100rem);
+  line-height:.86;
+  padding-top:.30em;                  /* clears the .275em ink overflow above the box */
+  margin-bottom:clamp(5px,.55vw,9px); /* lifts the baseline off the rule below */
+  letter-spacing:-.025em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  margin-left:-.028em;   /* optical: cancel the S sidebearing */
+}
+
+.hero__rule{
+  height:var(--rule-heavy);
+  background:currentColor;
+  transform-origin:left center;
+}
+
+.hero__meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:var(--hero-pad);
+  padding:clamp(.35rem,.75vw,.8rem) 0;
+  font-family:var(--font-display);   /* single typeface throughout */
+  font-size:clamp(.6rem,1.5vw,1.3rem);
+  line-height:1;
+  letter-spacing:0;
+  text-transform:uppercase;
+}
+.hero__meta span:last-child{text-align:right;}
+
+.hero__acts{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+.hero__act{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--hero-pad);
+  /* flush to the lockup edge so the label lines up with the meta row above */
+  padding:clamp(.55rem,1.05vw,1.05rem) 0;
+  border-radius:0;                   /* no pills anywhere in the lockup */
+  font-family:var(--font-display);
+  font-size:clamp(.95rem,2.5vw,2.2rem);
+  line-height:1;
+  letter-spacing:-.01em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  transition:background-color 500ms var(--ease), color 500ms var(--ease);
+}
+/* keep the arrow and the next label off the divider, edges stay flush */
+.hero__act:first-child{padding-right:clamp(.45rem,.9vw,.9rem);}
+.hero__act + .hero__act{
+  border-left:var(--rule-mid) solid var(--white);
+  padding-left:clamp(.45rem,.9vw,.9rem);
+}
+.hero__act:hover,
+.hero__act:focus-visible{
+  background:var(--white);
+  color:var(--black);                /* white ground -> black text */
+}
+.hero__arrow{font-size:.78em;}
+
+/* phones: stack the lockup to two lines so it owns the screen. "ATHENS" is the
+   longer word at 2.7383em, so 36vw fills ~94% of the measure per line. */
+@media (max-width:639px){
+  /* base size is set by ATHENS, the wider word; block is .499+1.431+.86 = 2.79em */
+  .hero__mark{
+    font-size:clamp(2rem,min(36vw,calc((100dvh - 15rem) / 2.79)),16rem);
+    padding-top:0;         /* the first line carries its own clearance */
+  }
+  .hero__mark span{display:block;}
+  /* SKIÁ is 1.6455em wide vs ATHENS at 2.7383em - scaled to match measured ink */
+  .hero__mark span:first-child{
+    font-size:1.631em;
+    padding-top:.30em;     /* clears this line's own accent overflow */
+    /* SKIÁ's baseline sits flush with its box bottom while ATHENS's caps start
+       just above its box top, so the two lines collide - lift SKIÁ clear */
+    transform:translateY(-.05em);
+  }
+}
+
+@media (max-width:640px){
+  /* reserve the nav band so the tall accent can never ride under it */
+  .hero{padding-top:5.5rem;}
+  .hero__acts{grid-template-columns:1fr;}
+  .hero__act:first-child{padding-right:0;}
+  .hero__act + .hero__act{
+    border-left:0;
+    border-top:var(--rule-mid) solid var(--white);
+    padding-left:0;                  /* stacked: both labels stay flush left */
+  }
+}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.7rem;
+  padding:.95rem 1.05rem .95rem 1.7rem;
+  border-radius:999px;
+  font-size:.68rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:var(--track-micro);
+  white-space:nowrap;
+  transition:transform 600ms var(--ease), background-color 600ms var(--ease),
+             color 600ms var(--ease), border-color 600ms var(--ease);
+}
+.btn:active{transform:scale(.98);}
+
+/* button-in-button trailing pip */
+.btn__pip{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:30px; height:30px;
+  border-radius:999px;
+  background:rgba(0,0,0,.07);
+  font-size:.72rem;
+  transition:transform 600ms var(--ease), background-color 600ms var(--ease);
+}
+
+/* =========================================================
+   2 - MANIFESTO (scrubbed word reveal)
+   ========================================================= */
+.manifesto{
+  background:var(--marble);
+  padding:calc(var(--pad-y) * 1.15) var(--pad-x);
+}
+.manifesto__text{
+  max-width:16ch;
+  font-family:var(--font-display);
+  font-size:clamp(2rem,6.4vw,6rem);
+  line-height:1.08;
+  letter-spacing:var(--track-display);
+  text-transform:uppercase;
+}
+@media (min-width:900px){
+  .manifesto__text{max-width:none;width:min(100%,20ch);}
+}
+/* phones/tablets: drop the narrow 16ch measure and let the statement fill the
+   screen the way it does on desktop */
+@media (max-width:899px){
+  .manifesto__text{
+    max-width:none;
+    font-size:clamp(2rem,10.5vw,3.5rem);
+  }
+}
+.manifesto__text .word{
+  display:inline-block;
+  opacity:.12;
+  will-change:opacity;
+}
+
+/* =========================================================
+   3 - COLLECTION (GSAP pinned split)
+   ========================================================= */
+.collection{
+  position:relative;
+  background:var(--marble);
+  padding:var(--pad-y) var(--pad-x);
+  display:grid;
+  grid-template-columns:1fr;
+  gap:4rem;
+}
+@media (min-width:900px){
+  .collection{
+    grid-template-columns:40% 1fr;
+    column-gap:clamp(3rem,7vw,9rem);
+    align-items:start;
+  }
+}
+
+.collection__pin{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+@media (min-width:900px){
+  .collection__pin{height:100vh;padding:0;}
+}
+
+.collection__head{
+  font-family:var(--font-display);
+  font-size:clamp(2.6rem,5.2vw,5.4rem);
+  line-height:.98;
+  letter-spacing:var(--track-display);
+  text-transform:uppercase;
+}
+/* the 01 rides the cap-line of COLLECTION instead of floating mid-word.
+   Anton cap height is .714em, so the lift is .714 - (.714 x .22) = .557em of the
+   h2 - expressed in the sup's own em that is .557 / .22. */
+.collection__head sup{
+  font-size:.22em;
+  vertical-align:baseline;
+  position:relative;
+  top:-2.53em;
+  margin-left:.16em;
+  letter-spacing:var(--track-micro);
+}
+.collection__note{
+  margin-top:clamp(1.6rem,3vw,2.6rem);
+  max-width:34ch;
+  font-size:.92rem;
+  line-height:1.9;
+  color:var(--grey-1);
+}
+
+.collection__stream{
+  display:flex;
+  flex-direction:column;
+  gap:clamp(5rem,12vh,11rem);
+}
+.piece figcaption{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:1rem;
+  margin-top:1.1rem;
+  padding-top:1.1rem;
+  border-top:1px solid var(--grey-5);
+  font-size:.63rem;
+  font-weight:500;
+  text-transform:uppercase;
+  letter-spacing:var(--track-micro);
+}
+.piece figcaption span:last-child{color:var(--grey-1);}
+.piece:hover .media img{transform:scale(1.045);}
+
+/* mirrors the shop's sub-row: caption above the hairline, action right-aligned
+   below it, so the enquiry sits in the same place on both sections */
+.piece__act{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:.6rem;
+}
+
+/* =========================================================
+   4 - LOOKBOOK (horizontal accordion)
+   ========================================================= */
+.lookbook{
+  background:var(--void);
+  color:var(--white);
+  padding:var(--pad-y) 0;
+}
+.lookbook__head{
+  padding:0 var(--pad-x);
+  margin-bottom:clamp(2.5rem,5vw,4.5rem);
+  font-family:var(--font-display);
+  font-size:clamp(1.9rem,4.4vw,4rem);
+  line-height:1;
+  letter-spacing:var(--track-display);
+  text-transform:uppercase;
+}
+
+.accordion{
+  display:flex;
+  width:100%;
+  height:clamp(420px,78vh,860px);
+}
+.slice{
+  position:relative;
+  flex:1 1 0;
+  min-width:0;
+  overflow:hidden;
+  border-right:1px solid rgba(255,255,255,.16);
+  transition:flex-grow var(--dur) var(--ease);
+}
+.slice:last-child{border-right:0;}
+.slice__media{position:absolute;inset:0;}
+.slice__media img{
+  width:100%;height:100%;
+  object-fit:cover;
+  /* the looks are standing portraits: anchor high so an opened slice keeps the
+     head in frame instead of centring on the hem */
+  object-position:center 24%;
+  filter:grayscale(1) contrast(1.18) brightness(.78);
+  transition:transform 1200ms var(--ease), filter 900ms var(--ease);
+}
+
+.slice__bar{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  display:flex;
+  align-items:baseline;
+  gap:.85rem;
+  padding:1.1rem 1.15rem;
+  background:var(--white);
+  color:var(--black);
+  white-space:nowrap;
+  overflow:hidden;
+}
+.slice__num{
+  font-family:var(--font-display);
+  font-size:.95rem;
+  letter-spacing:var(--track-display);
+}
+.slice__name{
+  font-size:.63rem;
+  font-weight:500;
+  text-transform:uppercase;
+  letter-spacing:var(--track-micro);
+  opacity:0;
+  transform:translateY(6px);
+  transition:opacity 700ms var(--ease), transform 700ms var(--ease);
+}
+/* rides the right end of the bar and appears with the look's name - a closed
+   slice is far too narrow to hold it */
+.slice__acq{
+  margin-left:auto;
+  flex:none;
+  opacity:0;
+  transform:translateY(6px);
+  transition:opacity 700ms var(--ease), transform 700ms var(--ease);
+}
+
+/* resting / click / keyboard state - works on touch too */
+@media (min-width:900px){
+  .slice.is-open{flex-grow:3.4;}
+  .slice.is-open .slice__media img{
+    filter:grayscale(1) contrast(1.1) brightness(1);
+    transform:scale(1.04);
+  }
+  .slice.is-open .slice__name,
+  .slice.is-open .slice__acq{opacity:1;transform:translateY(0);}
+}
+
+/* keyboard: focusing the button must not leave it invisible */
+.slice:focus-within .slice__name,
+.slice:focus-within .slice__acq{opacity:1;transform:translateY(0);}
+
+/* pointer devices: hover takes over from the resting state */
+@media (hover:hover) and (min-width:900px){
+  .accordion:hover .slice,
+  .accordion:hover .slice.is-open{flex-grow:.72;}
+  .accordion:hover .slice:hover{flex-grow:3.4;}
+  .accordion:hover .slice:hover .slice__media img{
+    filter:grayscale(1) contrast(1.1) brightness(1);
+    transform:scale(1.04);
+  }
+  .accordion:hover .slice:hover .slice__name,
+  .accordion:hover .slice:hover .slice__acq{opacity:1;transform:translateY(0);}
+}
+
+/* =========================================================
+   5 - SHOP (gapless dense bento: 4 cols x 2 rows = 8 cells)
+   ========================================================= */
+.shop{
+  background:var(--marble);
+  padding:var(--pad-y) var(--pad-x);
+}
+.shop__head{
+  margin-bottom:clamp(2.5rem,5vw,4.5rem);
+  font-family:var(--font-display);
+  font-size:clamp(1.9rem,4.4vw,4rem);
+  line-height:1;
+  letter-spacing:var(--track-display);
+  text-transform:uppercase;
+}
+
+.bento{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:clamp(1.1rem,2vw,1.9rem);
+}
+@media (min-width:900px){
+  .bento{
+    grid-template-columns:repeat(4,1fr);
+    grid-auto-rows:clamp(240px,22vw,360px);
+    grid-auto-flow:dense;
+  }
+  /* 2x2 + 2x1 + 1x1 + 1x1 = 8 cells = 4 cols x 2 rows, zero voids */
+  .prod--wide{grid-column:span 2;grid-row:span 2;}
+  .prod--span2{grid-column:span 2;grid-row:span 1;}
+}
+
+.prod{display:flex;flex-direction:column;}
+
+/* double-bezel, reserved for shop frames only */
+.prod__frame{
+  flex:1;
+  padding:clamp(.5rem,.7vw,.7rem);
+  background:rgba(0,0,0,.035);
+  border:1px solid rgba(0,0,0,.10);
+}
+.prod__inner{
+  aspect-ratio:4/5;
+  overflow:hidden;
+  background:var(--grey-5);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.5);
+}
+@media (min-width:900px){
+  .prod__frame{min-height:0;}
+  .prod__inner{aspect-ratio:auto;height:100%;}
+}
+.prod:hover .prod__inner img{transform:scale(1.05);}
+
+.prod__row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:1rem;
+  margin-top:1.1rem;
+}
+.prod__row--sub{margin-top:.5rem;}
+
+.prod__name{
+  font-size:.72rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:var(--track-micro);
+}
+.prod__price{
+  font-size:.72rem;
+  font-weight:500;
+  color:var(--ink-4);
+}
+
+.status{
+  font-size:.57rem;
+  font-weight:500;
+  text-transform:uppercase;
+  letter-spacing:var(--track-micro);
+  color:var(--grey-1);
+}
+.status--soon{color:var(--grey-3);}
+
+.acquire{
+  position:relative;
+  padding:0 0 2px;
+  border:0;
+  border-bottom:1px solid var(--black);
+  border-radius:0;
+  background:none;
+  font-size:.57rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:var(--track-micro);
+  cursor:pointer;
+  transition:opacity 500ms var(--ease);
+}
+.acquire:hover{opacity:.5;}
+.acquire:focus-visible,
+.field__input:focus-visible,
+.btn:focus-visible{outline:2px solid var(--black);outline-offset:3px;}
+
+/* =========================================================
+   ACQUIRE - enquiry drawer
+   ========================================================= */
+.enq{
+  position:fixed;
+  inset:0;
+  z-index:60;
+  visibility:hidden;
+  pointer-events:none;
+}
+.enq.is-open{visibility:visible;pointer-events:auto;}
+
+.enq__scrim{
+  position:absolute;
+  inset:0;
+  background:rgba(5,5,5,.62);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  opacity:0;
+  transition:opacity 700ms var(--ease);
+}
+.enq.is-open .enq__scrim{opacity:1;}
+
+.enq__panel{
+  position:absolute;
+  top:0; right:0; bottom:0;
+  width:min(100%,540px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:0;
+  padding:clamp(2rem,5vw,4rem);
+  background:var(--marble);
+  color:var(--black);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  transform:translateX(100%);
+  transition:transform 800ms var(--ease);
+}
+.enq.is-open .enq__panel{transform:translateX(0);}
+
+.enq__close{
+  position:absolute;
+  top:clamp(1.4rem,3vw,2.2rem);
+  right:clamp(1.4rem,3vw,2.2rem);
+  width:38px; height:38px;
+  padding:0;
+  border:0;
+  background:none;
+  cursor:pointer;
+}
+.enq__close span{
+  position:absolute;
+  left:7px; top:18px;
+  width:24px; height:1.5px;
+  background:var(--black);
+  transition:transform 600ms var(--ease);
+}
+.enq__close span:nth-child(1){transform:rotate(45deg);}
+.enq__close span:nth-child(2){transform:rotate(-45deg);}
+.enq__close:hover span:nth-child(1){transform:rotate(135deg);}
+.enq__close:hover span:nth-child(2){transform:rotate(45deg);}
+
+.enq__title{
+  font-family:var(--font-display);
+  font-size:clamp(2.4rem,6vw,3.6rem);
+  line-height:1;
+  letter-spacing:var(--track-display);
+  text-transform:uppercase;
+}
+
+.enq__piece{
+  margin-top:1.6rem;
+  padding-top:1.2rem;
+  border-top:1px solid var(--grey-5);
+}
+.enq__pieceName{
+  display:block;
+  font-size:.78rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:var(--track-micro);
+}
+.enq__pieceMeta{
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+  margin-top:.45rem;
+  font-size:.62rem;
+  font-weight:500;
+  text-transform:uppercase;
+  letter-spacing:var(--track-micro);
+  color:var(--grey-1);
+}
+.enq__dot{
+  width:3px; height:3px;
+  border-radius:999px;
+  background:var(--grey-4);
+}
+
+.enq__form{
+  display:flex;
+  flex-direction:column;
+  gap:1.7rem;
+  margin-top:2.6rem;
+}
+
+/* hairline fields, no boxes */
+.field{display:block;}
+.field__label{
+  display:block;
+  margin-bottom:.55rem;
+  font-size:.57rem;
+  font-weight:500;
+  text-transform:uppercase;
+  letter-spacing:var(--track-micro);
+  color:var(--grey-1);
+}
+.field__input{
+  display:block;
+  width:100%;
+  padding:.35rem 0 .7rem;
+  border:0;
+  border-bottom:1px solid var(--grey-4);
+  border-radius:0;
+  background:transparent;
+  font-size:.95rem;
+  resize:vertical;
+  transition:border-color 500ms var(--ease);
+}
+.field__input:focus{
+  outline:none;
+  border-bottom-color:var(--black);
+}
+.field__input.is-bad{border-bottom-color:var(--ink-1);}
+
+.enq__error{
+  margin:-.6rem 0 0;
+  font-size:.66rem;
+  font-weight:500;
+  color:var(--ink-1);
+}
+
+.btn--dark{
+  align-self:flex-start;
+  background:var(--black);
+  color:var(--white);          /* black pill -> white text */
+  border:1px solid var(--black);
+  cursor:pointer;
+}
+.btn--dark:hover{background:var(--ink-2);border-color:var(--ink-2);}
+.btn__pip--dark{background:rgba(255,255,255,.16);}
+.btn--dark:hover .btn__pip--dark{
+  transform:translate(2px,-1px) scale(1.06);
+  background:rgba(255,255,255,.24);
+}
+
+.enq__fine{
+  max-width:38ch;
+  font-size:.7rem;
+  line-height:1.8;
+  color:var(--grey-1);
+}
+
+.enq__done{display:flex;flex-direction:column;align-items:flex-start;gap:1.3rem;}
+.enq__doneMark{
+  font-family:var(--font-display);
+  font-size:clamp(2.4rem,6vw,3.6rem);
+  line-height:1;
+  letter-spacing:var(--track-display);
+  text-transform:uppercase;
+}
+.enq__doneNote{
+  max-width:40ch;
+  font-size:.9rem;
+  line-height:1.9;
+  color:var(--grey-1);
+}
+.enq__doneNote span{color:var(--black);font-weight:700;}
+
+@media (max-width:560px){
+  .enq__panel{width:100%;}
+}
+
+/* =========================================================
+   6 - ATELIER (editorial split + inline typography image)
+   ========================================================= */
+.atelier{
+  background:var(--marble);
+  padding:var(--pad-y) var(--pad-x);
+  display:grid;
+  grid-template-columns:1fr;
+  gap:clamp(3rem,6vw,5rem);
+  align-items:center;
+}
+@media (min-width:900px){
+  .atelier{
+    grid-template-columns:1.15fr .85fr;
+    column-gap:clamp(4rem,9vw,11rem);
+  }
+}
+
+.atelier__head{
+  font-family:var(--font-display);
+  font-size:clamp(2.4rem,6.2vw,6.4rem);
+  line-height:1.02;
+  letter-spacing:var(--track-display);
+  text-transform:uppercase;
+}
+.atelier__head .l{display:block;}
+
+/* pill photo set inline inside the heading, ~3.2:1 at .72 cap height */
+.inline-media{
+  display:inline-block;
+  width:clamp(88px,13vw,232px);
+  height:.72em;
+  margin-right:.12em;
+  /* .07em centres the pill between the cap-bottom above and the cap-top below
+     (Anton caps are .87em; measured gaps 29.9px vs 10.3px before the shift) */
+  vertical-align:.07em;
+  border-radius:999px;
+  background-image:url("../img/hands.webp");
+  background-size:cover;
+  background-position:center;
+  filter:grayscale(1) contrast(1.15);
+}
+
+.atelier__body{
+  margin-top:clamp(1.8rem,3.4vw,2.8rem);
+  max-width:44ch;
+  font-size:.95rem;
+  line-height:1.95;
+  color:var(--grey-1);
+}
+.atelier__media{max-width:520px;}
+.atelier__media:hover img{transform:scale(1.04);}
+
+/* =========================================================
+   7 - MARQUEE + FOOTER
+   ========================================================= */
+.footer{
+  background:var(--void);
+  color:var(--white);
+  padding-top:clamp(4rem,9vh,8rem);
+  overflow:hidden;
+}
+
+.marquee{
+  display:flex;
+  width:100%;
+  overflow:hidden;
+  user-select:none;
+}
+.marquee__track{
+  display:flex;
+  flex-shrink:0;
+  gap:clamp(1.5rem,3vw,3.5rem);
+  padding-right:clamp(1.5rem,3vw,3.5rem);
+  animation:marquee 34s linear infinite;
+  will-change:transform;
+}
+.marquee--rev .marquee__track{animation-direction:reverse;animation-duration:46s;}
+.marquee__track span{
+  font-family:var(--font-display);
+  font-size:clamp(2.6rem,9vw,9rem);
+  line-height:1.05;
+  letter-spacing:var(--track-display);
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.marquee__track span.o{
+  color:transparent;
+  -webkit-text-stroke:1.5px var(--white);
+}
+@keyframes marquee{
+  from{transform:translate3d(0,0,0);}
+  to{transform:translate3d(-50%,0,0);}
+}
+
+.footer__body{
+  padding:clamp(7rem,18vh,15rem) var(--pad-x) clamp(2.5rem,5vh,3.5rem);
+}
+
+.footer__cta{
+  display:block;
+  font-family:var(--font-display);
+  font-size:clamp(1.9rem,7.6vw,7.4rem);
+  line-height:1;
+  letter-spacing:var(--track-display);
+  text-transform:uppercase;
+  word-break:break-word;
+  transition:opacity 600ms var(--ease);
+}
+.footer__cta:hover{opacity:.55;}
+
+.footer__cities{
+  display:flex;
+  flex-wrap:wrap;
+  gap:clamp(1.5rem,4vw,4rem);
+  margin-top:clamp(2.2rem,4.5vh,3.4rem);
+}
+.footer__cities span{
+  font-size:.63rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:var(--track-micro);
+}
+
+.footer__rule{
+  height:1px;
+  margin-top:clamp(3rem,7vh,5.5rem);
+  background:var(--ink-3);
+}
+
+.footer__legal{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.6rem clamp(1.5rem,4vw,4rem);
+  margin-top:1.4rem;
+  font-size:.57rem;
+  font-weight:500;
+  text-transform:uppercase;
+  letter-spacing:var(--track-micro);
+  color:var(--grey-1);
+}
+
+/* build credit - sits in the legal row, marked as a link */
+.footer__credit{
+  color:var(--grey-4);
+  border-bottom:1px solid rgba(255,255,255,.26);
+  padding-bottom:1px;
+  transition:color 500ms var(--ease), border-color 500ms var(--ease);
+}
+.footer__credit:hover{
+  color:var(--white);
+  border-bottom-color:var(--white);
+}
+.footer__credit:focus-visible{
+  color:var(--white);
+  outline:2px solid var(--white);
+  outline-offset:3px;
+}
+
+/* =========================================================
+   RESPONSIVE COLLAPSE
+   ========================================================= */
+@media (max-width:899px){
+  .nav__links{display:none;}
+  .burger{display:block;}
+
+  .accordion{
+    flex-direction:column;
+    height:auto;
+  }
+  .slice{
+    flex:none;
+    height:64vh;
+    border-right:0;
+    border-bottom:1px solid rgba(255,255,255,.16);
+  }
+  .slice__name,
+  .slice__acq{opacity:1;transform:none;}
+  .slice__media img{filter:grayscale(1) contrast(1.12);}
+
+  .atelier__media{max-width:100%;}
+  .collection__stream{gap:4.5rem;}
+
+  /* on a small screen the inline pill was floored at 88x28 by its clamp and read
+     as a token chip. Sized off the viewport with a locked aspect instead, so it
+     scales without distorting. 50vw keeps the "HAND" that follows it on the same
+     line down to 320px with slack to spare if Anton falls back to Impact. */
+  .inline-media{
+    width:min(50vw,16rem);
+    height:auto;
+    aspect-ratio:2.9/1;
+    margin-right:.18em;
+    vertical-align:middle;
+  }
+  /* the pill fills its line box edge to edge, so the only separation from the
+     lines above and below was Anton's internal leading - which is lopsided
+     (descender space above the pill, cap space below). These two values are
+     unequal on purpose: they cancel that lopsidedness out and leave matching
+     ~14px optical gaps on both sides. */
+  .atelier__head .l:nth-child(2){
+    margin-top:.28em;
+    margin-bottom:.36em;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+  .manifesto__text .word{opacity:1 !important;}
+  .marquee__track{animation:none;transform:none;}
+  .overlay__nav a span{transform:none;}
+}

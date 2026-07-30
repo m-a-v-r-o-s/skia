@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SKIÁ Athens</title>
+<meta name="description" content="SKIÁ. Cut from light and shadow. A clothing house in Athens.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css?v=20260730i">
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a class="nav__mark" href="#top">SKIÁ</a>
+
+  <nav class="nav__links" aria-label="Primary">
+    <a class="nav__link" href="#collection">Collection</a>
+    <a class="nav__link" href="#atelier">Atelier</a>
+    <a class="nav__link" href="#shop">Pieces</a>
+    <a class="nav__link nav__link--cta" href="#acquire"
+       data-acquire-general aria-haspopup="dialog">
+      Acquire<span class="nav__arrow" aria-hidden="true">&#8599;</span>
+    </a>
+  </nav>
+
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="overlay">
+    <span></span><span></span>
+  </button>
+</header>
+
+<div class="overlay" id="overlay" aria-hidden="true">
+  <nav class="overlay__nav" aria-label="Mobile">
+    <a href="#collection"><span>Collection</span></a>
+    <a href="#lookbook"><span>Lookbook</span></a>
+    <a href="#shop"><span>Select Pieces</span></a>
+    <a href="#atelier"><span>Atelier</span></a>
+    <a href="#acquire" data-acquire-general aria-haspopup="dialog"><span>Acquire</span></a>
+  </nav>
+  <p class="overlay__foot">Athens 37.9838&deg; N</p>
+</div>
+
+<main id="top">
+
+  <!-- ATTENTION -->
+  <section class="hero" data-theme="dark">
+    <div class="hero__media">
+      <img src="img/hero.webp" alt="" aria-hidden="true">
+    </div>
+    <div class="hero__wash" aria-hidden="true"></div>
+
+    <div class="hero__lockup">
+      <h1 class="hero__mark"><span>SKIÁ</span> <span>Athens</span></h1>
+
+      <div class="hero__rule" aria-hidden="true"></div>
+
+      <div class="hero__meta">
+        <span>Cut from light and shadow</span>
+        <span>#000 Shadow X #FFF Marble</span>
+      </div>
+
+      <div class="hero__rule" aria-hidden="true"></div>
+
+      <div class="hero__acts">
+        <a class="hero__act" href="#collection">
+          <span>View Collection</span>
+          <span class="hero__arrow" aria-hidden="true">&#8599;</span>
+        </a>
+        <a class="hero__act" href="#atelier">
+          <span>The Atelier</span>
+          <span class="hero__arrow" aria-hidden="true">&#8599;</span>
+        </a>
+      </div>
+
+      <div class="hero__rule" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- INTEREST -->
+  <section class="manifesto" data-theme="light">
+    <p class="manifesto__text" data-split>
+      In Athens the light does not soften. It cuts. Every piece we make records that edge:
+      the white of marble, the black of the shadow it throws at noon.
+    </p>
+  </section>
+
+  <!-- INTEREST -->
+  <section class="collection" id="collection" data-theme="light">
+    <div class="collection__pin" id="collectionPin">
+      <h2 class="collection__head">Collection<sup>01</sup><br>Marmara</h2>
+      <p class="collection__note">
+        Five pieces cut from Greek cloth and Greek light.
+        Made in Athens, in a room that faces east.
+      </p>
+    </div>
+
+    <div class="collection__stream">
+      <figure class="piece">
+        <div class="media media--3x4"><img src="img/piece-volakas.webp" alt="Volakas overcoat"></div>
+        <figcaption><span>Volakas</span><span>Overcoat &middot; ECEC EC</span></figcaption>
+        <div class="piece__act"><button class="acquire" type="button" data-acquire data-piece="Volakas Overcoat">Acquire</button></div>
+      </figure>
+      <figure class="piece">
+        <div class="media media--3x4"><img src="img/piece-delos.webp" alt="Delos shirt"></div>
+        <figcaption><span>Delos</span><span>Poplin shirt &middot; FFFF FF</span></figcaption>
+        <div class="piece__act"><button class="acquire" type="button" data-acquire data-piece="Delos Shirt">Acquire</button></div>
+      </figure>
+      <figure class="piece">
+        <div class="media media--3x4"><img src="img/piece-naxos.webp" alt="Naxos trouser"></div>
+        <figcaption><span>Naxos</span><span>Wide trouser &middot; 3C3C 3C</span></figcaption>
+        <div class="piece__act"><button class="acquire" type="button" data-acquire data-piece="Naxos Trouser">Acquire</button></div>
+      </figure>
+      <figure class="piece">
+        <div class="media media--3x4"><img src="img/piece-serifos.webp" alt="Serifos knit"></div>
+        <figcaption><span>Serifos</span><span>Ribbed knit &middot; 1E1E 1E</span></figcaption>
+        <div class="piece__act"><button class="acquire" type="button" data-acquire data-piece="Serifos Knit">Acquire</button></div>
+      </figure>
+      <figure class="piece">
+        <div class="media media--3x4"><img src="img/piece-anafi.webp" alt="Anafi jacket"></div>
+        <figcaption><span>Anafi</span><span>Cropped jacket &middot; 0000 00</span></figcaption>
+        <div class="piece__act"><button class="acquire" type="button" data-acquire data-piece="Anafi Jacket">Acquire</button></div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- DESIRE -->
+  <section class="lookbook" id="lookbook" data-theme="dark">
+    <h2 class="lookbook__head">Lookbook / Aegean</h2>
+
+    <div class="accordion" id="accordion">
+      <article class="slice is-open">
+        <div class="slice__media"><img src="img/look-1.webp" alt="Look I, Noon"></div>
+        <div class="slice__bar"><span class="slice__num">I</span><span class="slice__name">Noon</span><button class="acquire slice__acq" type="button" data-acquire data-piece="Look I, Noon">Acquire</button></div>
+      </article>
+      <article class="slice">
+        <div class="slice__media"><img src="img/look-2.webp" alt="Look II, Peristyle"></div>
+        <div class="slice__bar"><span class="slice__num">II</span><span class="slice__name">Peristyle</span><button class="acquire slice__acq" type="button" data-acquire data-piece="Look II, Peristyle">Acquire</button></div>
+      </article>
+      <article class="slice">
+        <div class="slice__media"><img src="img/look-3.webp" alt="Look III, East Room"></div>
+        <div class="slice__bar"><span class="slice__num">III</span><span class="slice__name">East Room</span><button class="acquire slice__acq" type="button" data-acquire data-piece="Look III, East Room">Acquire</button></div>
+      </article>
+      <article class="slice">
+        <div class="slice__media"><img src="img/look-4.webp" alt="Look IV, Salt"></div>
+        <div class="slice__bar"><span class="slice__num">IV</span><span class="slice__name">Salt</span><button class="acquire slice__acq" type="button" data-acquire data-piece="Look IV, Salt">Acquire</button></div>
+      </article>
+      <article class="slice">
+        <div class="slice__media"><img src="img/look-5.webp" alt="Look V, Eclipse"></div>
+        <div class="slice__bar"><span class="slice__num">V</span><span class="slice__name">Eclipse</span><button class="acquire slice__acq" type="button" data-acquire data-piece="Look V, Eclipse">Acquire</button></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- DESIRE -->
+  <section class="shop" id="shop" data-theme="light">
+    <h2 class="shop__head">Select Pieces</h2>
+
+    <div class="bento">
+      <article class="prod prod--wide">
+        <div class="prod__frame">
+          <div class="prod__inner"><img src="img/shop-penteli.webp" alt="Penteli overcoat"></div>
+        </div>
+        <div class="prod__row">
+          <span class="prod__name">Penteli Overcoat</span>
+          <span class="prod__price">&euro;2,480</span>
+        </div>
+        <div class="prod__row prod__row--sub">
+          <span class="status">Available</span>
+          <button class="acquire" type="button" data-acquire
+            data-piece="Penteli Overcoat" data-price="&euro;2,480">Acquire</button>
+        </div>
+      </article>
+
+      <article class="prod prod--span2">
+        <div class="prod__frame">
+          <div class="prod__inner"><img src="img/shop-tinos.webp" alt="Tinos jacket"></div>
+        </div>
+        <div class="prod__row">
+          <span class="prod__name">Tinos Jacket</span>
+          <span class="prod__price">&euro;1,960</span>
+        </div>
+        <div class="prod__row prod__row--sub">
+          <span class="status status--soon">Coming Soon</span>
+          <button class="acquire" type="button" data-acquire
+            data-piece="Tinos Jacket" data-price="&euro;1,960">Enquire</button>
+        </div>
+      </article>
+
+      <article class="prod">
+        <div class="prod__frame">
+          <div class="prod__inner"><img src="img/shop-paros.webp" alt="Paros shirt"></div>
+        </div>
+        <div class="prod__row">
+          <span class="prod__name">Paros Shirt</span>
+          <span class="prod__price">&euro;390</span>
+        </div>
+        <div class="prod__row prod__row--sub">
+          <span class="status">Available</span>
+          <button class="acquire" type="button" data-acquire
+            data-piece="Paros Shirt" data-price="&euro;390">Acquire</button>
+        </div>
+      </article>
+
+      <article class="prod">
+        <div class="prod__frame">
+          <div class="prod__inner"><img src="img/shop-thassos.webp" alt="Thassos knit"></div>
+        </div>
+        <div class="prod__row">
+          <span class="prod__name">Thassos Knit</span>
+          <span class="prod__price">&euro;740</span>
+        </div>
+        <div class="prod__row prod__row--sub">
+          <span class="status">Available</span>
+          <button class="acquire" type="button" data-acquire
+            data-piece="Thassos Knit" data-price="&euro;740">Acquire</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- DESIRE -->
+  <section class="atelier" id="atelier" data-theme="light">
+    <div class="atelier__text">
+      <h2 class="atelier__head">
+        <span class="l">Cut by</span>
+        <span class="l"><span class="inline-media" role="img" aria-label="Hands pinning cloth"></span> hand</span>
+        <span class="l">in Athens</span>
+      </h2>
+      <p class="atelier__body">
+        One room above Kolonaki. Four cutters. Nothing leaves before it has been worn,
+        washed, and worn again. We make fewer than four hundred pieces a year.
+      </p>
+    </div>
+
+    <div class="atelier__media media media--3x4">
+      <img src="img/atelier.webp" alt="The atelier in Athens">
+    </div>
+  </section>
+
+  <!-- ACTION -->
+  <footer class="footer" id="acquire" data-theme="dark">
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>SKIÁ</span><span class="o">&#934;&#937;&#931;</span><span>000</span><span class="o">&#931;&#922;&#921;&#913;</span><span>FFF</span>
+        <span>SKIÁ</span><span class="o">&#934;&#937;&#931;</span><span>000</span><span class="o">&#931;&#922;&#921;&#913;</span><span>FFF</span>
+      </div>
+    </div>
+    <div class="marquee marquee--rev" aria-hidden="true">
+      <div class="marquee__track">
+        <span class="o">Athens</span><span>MMXXVI</span><span class="o">Marmara</span><span>Noon</span>
+        <span class="o">Athens</span><span>MMXXVI</span><span class="o">Marmara</span><span>Noon</span>
+      </div>
+    </div>
+
+    <div class="footer__body">
+      <a class="footer__cta" href="mailto:atelier@skia.gr">atelier@skia.gr</a>
+
+      <div class="footer__cities" id="stockists">
+        <span>Athens</span><span>Mykonos</span><span>Paris</span>
+      </div>
+
+      <div class="footer__rule"></div>
+
+      <div class="footer__legal">
+        <span>SKIÁ Athens, Est. MMXXVI</span>
+        <span>Kolonaki, Athens 37.9838&deg; N</span>
+        <span>All rights reserved</span>
+        <a class="footer__credit" href="https://akosds.com"
+           target="_blank" rel="noopener noreferrer">Akos Digital Services</a>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<!-- ACQUIRE: in-page enquiry drawer -->
+<div class="enq" id="enq" aria-hidden="true">
+  <div class="enq__scrim" data-enq-close></div>
+
+  <aside class="enq__panel" role="dialog" aria-modal="true" aria-labelledby="enqTitle">
+    <button class="enq__close" type="button" data-enq-close aria-label="Close">
+      <span></span><span></span>
+    </button>
+
+    <div class="enq__body" id="enqBody">
+      <h2 class="enq__title" id="enqTitle">Acquire</h2>
+
+      <div class="enq__piece">
+        <span class="enq__pieceName" id="enqPiece">Penteli Overcoat</span>
+        <span class="enq__pieceMeta">
+          <span id="enqPrice">&euro;2,480</span>
+          <span class="enq__dot" aria-hidden="true"></span>
+          <span id="enqStatus">Available</span>
+        </span>
+      </div>
+
+      <form class="enq__form" id="enqForm" novalidate>
+        <label class="field">
+          <span class="field__label">Name</span>
+          <input class="field__input" type="text" name="name" autocomplete="name" required>
+        </label>
+
+        <label class="field">
+          <span class="field__label">Email</span>
+          <input class="field__input" type="email" name="email" autocomplete="email" required>
+        </label>
+
+        <label class="field">
+          <span class="field__label">Size, fit, notes</span>
+          <textarea class="field__input" name="notes" rows="3"></textarea>
+        </label>
+
+        <p class="enq__error" id="enqError" role="alert" hidden></p>
+
+        <button class="btn btn--dark" type="submit">
+          Send enquiry
+          <span class="btn__pip btn__pip--dark" aria-hidden="true">&#8599;</span>
+        </button>
+
+        <p class="enq__fine">A cutter replies within two working days. Fittings are held in Athens by appointment.</p>
+      </form>
+    </div>
+
+    <div class="enq__done" id="enqDone" hidden>
+      <p class="enq__doneMark">Received.</p>
+      <p class="enq__doneNote">Your enquiry<span id="enqDoneFor"> for <span id="enqDonePiece"></span></span> is with the atelier. A cutter replies within two working days.</p>
+      <button class="btn btn--dark" type="button" data-enq-close>Close</button>
+    </div>
+  </aside>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="js/main.js?v=20260730f"></script>
+</body>
+</html>
