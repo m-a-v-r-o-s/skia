@@ -1197,3 +1197,48 @@ sup{font-size:.34em;vertical-align:super;letter-spacing:0;}
   .marquee__track{animation:none;transform:none;}
   .overlay__nav a span{transform:none;}
 }
+
+/* =========================================================
+   STATIC PAGES (404 / privacy / terms)
+   ========================================================= */
+.static-page{
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:2rem;
+  padding:var(--pad-y) var(--pad-x);
+  max-width:46rem;
+}
+.static-page__mark{
+  font-family:var(--font-display);
+  font-size:clamp(1.1rem, 2vw, 1.4rem);
+  letter-spacing:var(--track-display);
+}
+.static-page__head{
+  font-family:var(--font-display);
+  font-size:clamp(2.4rem, 8vw, 5rem);
+  line-height:.95;
+  letter-spacing:var(--track-display);
+  margin:0;
+}
+.static-page__body{
+  font-size:1rem;
+  line-height:1.7;
+  color:var(--ink-4);
+  max-width:38rem;
+}
+.static-page__body + .static-page__body{margin-top:-1.2rem;}
+.static-page h2{
+  font-family:var(--font-display);
+  font-size:1.05rem;
+  letter-spacing:var(--track-micro);
+  text-transform:uppercase;
+  margin:2rem 0 0;
+}
+.static-page__updated{
+  font-size:.72rem;
+  text-transform:uppercase;
+  letter-spacing:var(--track-micro);
+  color:var(--grey-2);
+}
